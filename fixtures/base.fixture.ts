@@ -2,12 +2,12 @@ import {test as base} from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
 import { InventoryPage } from '../pages/inventory.page';
 
-type AuthFixtures = {
+type MyFixtures = {
     loginPage: LoginPage;
     inventoryPage: InventoryPage;
 }
 
-export const test = base.extend<AuthFixtures>({
+export const test = base.extend<MyFixtures>({
     loginPage: async ({page}, use) => {
         await use(new LoginPage(page))
     },
