@@ -1,24 +1,16 @@
-import test, { expect } from "@playwright/test";
-import { LoginPage } from "../../pages/login.page";
-import { validInforLogin } from "../../utils";
+import { test, expect } from "../../fixtures/auth.fixture";
+import { invalidCases, validInforLogin } from "../../utils";
 
-test("login success", async ({page}) => {
-    const loginPage = new LoginPage(page);
+test("login success", async ({loginPage, inventoryPage}) => {
     await loginPage.goTo();
     await loginPage.login(validInforLogin.username, validInforLogin.password);
-    await expect(page.locator('#flash')).toContainText('You logged into a secure area!');
+    await expect(inventoryPage.productsTitle).toBeVisible();
 });
 
-test("login fail username", async ({page}) => {
-    const loginPage = new LoginPage(page);
+for (const data of invalidCases) {
+    test(`login fail with ${data.username}`, async ({ page, loginPage }) => {
     await loginPage.goTo();
-    await loginPage.login("123", validInforLogin.password);
-    await expect(page.locator('#flash')).toContainText('Your username is invalid!')
-})
-
-test("login fail password", async ({page}) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goTo();
-    await loginPage.login(validInforLogin.username, "12345678");
-    await expect(page.locator('#flash')).toContainText('Your password is invalid!')
-})
+    await loginPage.login(data.username, data.password);
+    await expect(page.locator('[data-test="error"]')).toBeVisible();
+});
+}

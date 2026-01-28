@@ -9,13 +9,13 @@ export class LoginPage {
 
     constructor(page: Page){
         this.page = page;
-        this.userName = page.getByLabel("Username")
-        this.password = page.getByLabel("Password")
+        this.userName = page.getByPlaceholder("Username")
+        this.password = page.getByPlaceholder("Password")
         this.buttonLogin = page.getByRole("button", {name: "Login"});
     }
 
     async goTo(){
-        await this.page.goto('https://the-internet.herokuapp.com/login', { waitUntil: 'domcontentloaded' });
+        await this.page.goto('https://www.saucedemo.com/', { waitUntil: 'domcontentloaded' });
     }
 
     async login(userName: string, password: string) {
