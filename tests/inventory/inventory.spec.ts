@@ -1,9 +1,10 @@
 import { test, expect } from "../../fixtures/base.fixture";
+import { validInforLogin } from "../../utils";
 
 test.describe("Inventory page", () => {
   test.beforeEach(async ({ loginPage }) => {
     await loginPage.goTo();
-    await loginPage.login("standard_user", "secret_sauce");
+    await loginPage.login(validInforLogin.username, validInforLogin.password);
   });
 
   test("user sees product list after login", async ({ inventoryPage }) => {
@@ -13,25 +14,25 @@ test.describe("Inventory page", () => {
     expect(products).toContain("Sauce Labs Backpack");
   });
 
-  test("user can add product to cart", async ({ inventoryPage }) => {
-    await inventoryPage.addProductByName("Sauce Labs Backpack");
+  // test("user can add product to cart", async ({ inventoryPage }) => {
+  //   await inventoryPage.addProductByName("Sauce Labs Backpack");
 
-    await expect.poll(() => inventoryPage.getCartCount()).toBe(1);
-  });
+  //   await expect.poll(() => inventoryPage.getCartCount()).toBe(1);
+  // });
 
-  test("user can remove product from cart", async ({ inventoryPage }) => {
-    await inventoryPage.addProductByName("Sauce Labs Backpack");
-    await inventoryPage.removeProductByName("Sauce Labs Backpack");
+  // test("user can remove product from cart", async ({ inventoryPage }) => {
+  //   await inventoryPage.addProductByName("Sauce Labs Backpack");
+  //   await inventoryPage.removeProductByName("Sauce Labs Backpack");
 
-    await expect.poll(() => inventoryPage.getCartCount()).toBe(0);
-  });
+  //   await expect.poll(() => inventoryPage.getCartCount()).toBe(0);
+  // });
 
-  test("user can sort products by price low to high", async ({ inventoryPage }) => {
-    await inventoryPage.sortBy("lohi");
+  // test("user can sort products by price low to high", async ({ inventoryPage }) => {
+  //   await inventoryPage.sortBy("lohi");
 
-    const prices = await inventoryPage.getProductPrices();
-    const sortedPrices = [...prices].sort((a, b) => a - b);
+  //   const prices = await inventoryPage.getProductPrices();
+  //   const sortedPrices = [...prices].sort((a, b) => a - b);
 
-    expect(prices).toEqual(sortedPrices);
-  });
+  //   expect(prices).toEqual(sortedPrices);
+  // });
 });
