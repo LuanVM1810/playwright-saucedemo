@@ -12,7 +12,7 @@ export class InventoryPage {
     this.productsTitle = page.locator('[data-test="title"]');
     this.listItem = page.locator('[data-test="inventory_list"]');
     this.cartBadge = page.locator(".shopping_cart_badge");
-    this.sortDropdown = page.locator('[data-test="product_sort_container"]');
+    this.sortDropdown = page.locator('[data-test="product-sort-container"]');
   }
 
   async goto() {
