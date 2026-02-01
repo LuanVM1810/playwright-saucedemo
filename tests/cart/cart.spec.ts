@@ -1,9 +1,15 @@
-import { test } from "../../fixtures/base.fixture";
+import { expect, test } from "../../fixtures/base.fixture";
 import { validInforLogin } from "../../utils";
 
 test.describe('Cart page', () => {
     test.beforeEach(async ({loginPage}) => {
-        loginPage.goTo();
-        loginPage.login(validInforLogin.username, validInforLogin.password);
+        await loginPage.goTo();
+        await loginPage.login(validInforLogin.username, validInforLogin.password);
+    })
+
+    test('user can back home page to shopping', async ({cartPage, inventoryPage, page}) => {
+        await inventoryPage.clickCartIcon();
+        await cartPage.clickContinueShopping();
+        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
     })
 })

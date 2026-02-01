@@ -7,8 +7,8 @@ export class CartPage {
 
     constructor(page: Page){
         this.page = page;
-        this.continueBtn = page.getByRole('button', {name: 'Continue Shopping'});
-        this.checkoutBtn = page.getByRole('button', {name : 'Checkout'});
+        this.continueBtn = page.getByRole('button', {name: /continue shopping/i});
+        this.checkoutBtn = page.getByRole('button', {name : /checkout/i});
     }
 
     async goto(){
@@ -16,10 +16,10 @@ export class CartPage {
     }
 
     async clickContinueShopping(){
-        this.continueBtn.click();
+        await this.continueBtn.click();
     }
 
     async clickCheckout(){
-        this.checkoutBtn.click();
+        await this.checkoutBtn.click();
     }
 }
