@@ -12,4 +12,10 @@ test.describe('Cart page', () => {
         await cartPage.clickContinueShopping();
         await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
     })
+
+    test('user checkout', async ({inventoryPage, cartPage, page}) => {
+        await inventoryPage.clickCartIcon();
+        await cartPage.clickCheckout()
+        await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-one.html');
+    })
 })
