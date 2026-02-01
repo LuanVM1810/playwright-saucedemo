@@ -7,7 +7,7 @@ test.describe("Inventory page", () => {
     await loginPage.login(validInforLogin.username, validInforLogin.password);
   });
 
-  test("user sees product list after login", async ({ inventoryPage }) => {
+  test("user sees product list after login", async ({inventoryPage }) => {
     const products = await inventoryPage.getProductNames();
 
     expect(products.length).toBe(6);
