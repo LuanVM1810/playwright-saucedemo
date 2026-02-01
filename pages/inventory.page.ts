@@ -6,6 +6,7 @@ export class InventoryPage {
   readonly listItem: Locator;
   readonly cartBadge: Locator;
   readonly sortDropdown: Locator;
+  readonly cartIcon: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,6 +14,7 @@ export class InventoryPage {
     this.listItem = page.locator('[data-test="inventory_list"]');
     this.cartBadge = page.locator(".shopping_cart_badge");
     this.sortDropdown = page.locator('[data-test="product-sort-container"]');
+    this.cartIcon = page.locator('[data-test="shopping-cart-link"]');
   }
 
   async goto() {
@@ -52,5 +54,9 @@ export class InventoryPage {
 
   async sortBy(option: "az" | "za" | "lohi" | "hilo") {
     await this.sortDropdown.selectOption(option);
+  }
+
+  async clickCartIcon(){
+    await this.cartIcon.click();
   }
 }
